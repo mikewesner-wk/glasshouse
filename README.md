@@ -1,7 +1,8 @@
 glasshouse
 ==========
 
-A way to control an Indigo / Insteon smart home
+A way to control an Indigo / Insteon smart home from Google Glass
+(for now its just a way to get RESTful api on Indigo.)
 
 Indigo is a great piece of OS X software that can control and manage an Insteon smart home.
 
