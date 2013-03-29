@@ -4,8 +4,11 @@ import indigo
 from basicauth import requires_auth
 
 @app.route('/logs')
-def api_root():
-    return 'Welcome'
+@requires_auth
+def api_logs():
+    resp = jsonify(indigo.server.getEventLogList.split('\n'))
+    resp.status_code = 200
+    return resp
 
 @app.route('/devices', methods = ['GET'])
 @requires_auth
@@ -16,6 +19,6 @@ def api_devices():
     return resp
 
 @app.route('/devices/<deviceid>')
-def api_article(deviceid):
-    return 'Device ' + deviceid
+def api_device_by_id(deviceid):
+    pass
 
