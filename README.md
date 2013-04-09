@@ -48,6 +48,12 @@ Architecture:
 
     I'll use https://github.com/kamalgill/flask-appengine-template
 
+    # Development environment pip requirements file
+    # Install via 'pip install -r requirements_dev.txt'
+
+    PIL
+    jinja2
+    simplejson
 
     House Tier:
     This would be the indigo plugin which is just a flask dev server running
