@@ -6,7 +6,7 @@ from basicauth import requires_auth
 @app.route('/logs')
 @requires_auth
 def api_logs():
-    resp = jsonify(indigo.server.getEventLogList.split('\n'))
+    resp = jsonify(indigo.server.getEventLogList().split('\n'))
     resp.status_code = 200
     return resp
 

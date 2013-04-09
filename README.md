@@ -46,6 +46,8 @@ Architecture:
     preferences for those things.  The app will give you a secret token the
     "Glass House API Token" to put into the House Tier's indigo plugin.
 
+    I'll use https://github.com/kamalgill/flask-appengine-template
+
 
     House Tier:
     This would be the indigo plugin which is just a flask dev server running
@@ -54,3 +56,5 @@ Architecture:
     This tier will have a set of RESTful endpoints, have some type of database
     like sqlite to track preferences for push notifications, and be able to send
     rest calls on certain events.
+
+
