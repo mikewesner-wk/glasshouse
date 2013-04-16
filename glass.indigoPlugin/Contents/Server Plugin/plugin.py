@@ -18,7 +18,11 @@ class Plugin(indigo.PluginBase):
         indigo.PluginBase.__init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs)
         self.debug = True
         # this starts a webserver on port 5000
-        rest.app.run()
+        # We have it create a new ssl context each
+        # time this starts up.  Not going to be to
+        # picky about the ssl, just want to prevent
+        # snooping.
+        rest.app.run(ssl_context='adhoc')
 
     def __del__(self):
         indigo.PluginBase.__del__(self)
