@@ -1,2 +1,3 @@
 #!/bin/bash
-cp -R glass.indigoPlugin /Library/Application\ Support/Perceptive\ Automation/Indigo\ 5/Plugins
+rm -fr /Library/Application\ Support/Perceptive\ Automation/Indigo\ 5/Plugins/glasshouse.indigoPlugin
+cp -R glasshouse.indigoPlugin /Library/Application\ Support/Perceptive\ Automation/Indigo\ 5/Plugins/

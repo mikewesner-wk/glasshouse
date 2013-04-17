@@ -7,7 +7,9 @@
 import os
 import sys
 import rest
-
+import settings
+from threading import local
+import db
 # Note the "indigo" module is automatically imported and made available inside
 # our global name space by the host process.
 
@@ -17,6 +19,8 @@ class Plugin(indigo.PluginBase):
     def __init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs):
         indigo.PluginBase.__init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs)
         self.debug = True
+
+        db.setup()
         # this starts a webserver on port 5000
         # We have it create a new ssl context each
         # time this starts up.  Not going to be to
@@ -30,6 +34,10 @@ class Plugin(indigo.PluginBase):
     ########################################
     def startup(self):
         self.debugLog(u"startup called -- subscribing to all X10 and INSTEON commands")
+
+        # if not self.pluginPrefs.has_key("apitoken"):
+        #     self.pluginPrefs["apitoken"] = "1234"  # default (first launch) pref values
+
         indigo.insteon.subscribeToIncoming()
         indigo.insteon.subscribeToOutgoing()
         indigo.x10.subscribeToIncoming()

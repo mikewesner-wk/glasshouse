@@ -5,6 +5,13 @@ A way to control an Indigo / Insteon smart home from Google Glass
 
 Indigo is a great piece of OS X software that can control and manage an Insteon smart home.
 
+General Install Instructions:
+    1. install indigo plugin in indigo 5+
+    2. go to glasshouse.konsole.net and signup
+        a. it will ask for the dns to your indigo install
+        b. it will ask you to authorize it to use mirror api and user info
+    3. take the api key from the website and enter it into the plugins preferences
+
 Requirements:
 
     Anyone wanting to use this will require the following:
@@ -62,5 +69,14 @@ Architecture:
     This tier will have a set of RESTful endpoints, have some type of database
     like sqlite to track preferences for push notifications, and be able to send
     rest calls on certain events.
+
+
+
+Setup:
+
+    For the appengine app:
+
+    npm uninstall -g grunt
+    npm install -g grunt-cli
 
 

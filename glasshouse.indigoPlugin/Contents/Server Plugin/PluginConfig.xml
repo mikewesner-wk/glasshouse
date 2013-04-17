@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<PluginConfig>
+    <Field type="textfield" id="apitoken111">
+        <Label>API Token</Label>
+    </Field>
+</PluginConfig>

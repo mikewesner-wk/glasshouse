@@ -1,3 +1,5 @@
+PLUGINPREFS = None
+
 GOOGLE_API_CLIENT_ID = 'myid.apps.googleusercontent.com'
 GOOGLE_API_CLIENT_SECRET = 'my secret code'
 GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'

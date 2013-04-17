@@ -1,6 +1,8 @@
 from functools import wraps
 from flask import jsonify
 from flask import request, Response
+import settings
+
 
 def check_auth(username, password):
     import settings
@@ -25,5 +27,27 @@ def requires_auth(f):
         elif not check_auth(auth.username, auth.password):
             return authenticate()
         return f(*args, **kwargs)
+
+    return decorated
+
+
+
+def requires_apitoken(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        try:
+
+            request.headers.get('apitoken')
+
+            #.pluginPrefs.get('apikey')
+            # if request.headers.get('apitoken') == plugin.pluginPrefs.get('apikey'):
+            #     return f(*args, **kwargs)
+            # else:
+            message = {'message': "Authenticate."}
+            resp = jsonify(message)
+            resp.status_code = 401
+            return resp
+        except Exception, e:
+            indigo.server.log(str(e))
 
     return decorated

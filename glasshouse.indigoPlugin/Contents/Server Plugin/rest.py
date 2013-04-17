@@ -1,17 +1,23 @@
 from flask import Flask, url_for, Response, json, jsonify
 app = Flask(__name__)
 import indigo
-from basicauth import requires_auth
+from decorators import requires_apitoken
 
 @app.route('/logs')
-@requires_auth
+@requires_apitoken
 def api_logs():
-    resp = jsonify(indigo.server.getEventLogList().split('\n'))
-    resp.status_code = 200
+    try:
+        #resp = jsonify(indigo.server.getEventLogList().split('\n'))
+        resp = jsonify({"logs":indigo.server.getEventLogList()})
+        resp.status_code = 200
+    except Exception, e:
+        indigo.server.log(str(e))
+        return None
+
     return resp
 
 @app.route('/devices', methods = ['GET'])
-@requires_auth
+@requires_apitoken
 def api_devices():
     data = dict([(d.address, d.name) for d in indigo.devices])
     resp = jsonify(data)
