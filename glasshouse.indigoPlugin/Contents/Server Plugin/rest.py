@@ -2,6 +2,25 @@ from flask import Flask, url_for, Response, json, jsonify
 app = Flask(__name__)
 import indigo
 from decorators import requires_apitoken
+import requests
+
+#
+# Appspot Account Setup Process
+@app.route('/status')
+def status():
+    payload = {'status': True}
+    resp = jsonify(payload)
+    resp.status_code = 200
+    return resp
+
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    # todo, some type of security on this endpoint
+    from flask import request
+    func = request.environ.get('werkzeug.server.shutdown')
+    func()
+    return 'Shutting Down.'
 
 @app.route('/logs')
 @requires_apitoken
