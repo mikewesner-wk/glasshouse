@@ -36,17 +36,15 @@ def requires_apitoken(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         try:
-
             request.headers.get('apitoken')
 
-            #.pluginPrefs.get('apikey')
-            # if request.headers.get('apitoken') == plugin.pluginPrefs.get('apikey'):
-            #     return f(*args, **kwargs)
-            # else:
-            message = {'message': "Authenticate."}
-            resp = jsonify(message)
-            resp.status_code = 401
-            return resp
+            if request.headers.get('apitoken') == "1234":
+                return f(*args, **kwargs)
+            else:
+                message = {'message': "Authenticate."}
+                resp = jsonify(message)
+                resp.status_code = 401
+                return resp
         except Exception, e:
             indigo.server.log(str(e))
 
