@@ -417,7 +417,9 @@ class BaseWSGIServer(HTTPServer, object):
     def serve_forever(self):
         self.shutdown_signal = False
         try:
-            HTTPServer.serve_forever(self)
+            while not self.shutdown_signal:
+                self.handle_request()
+            # HTTPServer.serve_forever(self)
         except KeyboardInterrupt:
             pass
 
