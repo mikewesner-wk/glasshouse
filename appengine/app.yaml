@@ -1,4 +1,4 @@
-application: glasshouse
+application: xglasshouse
 version: 1
 runtime: python27
 api_version: 1
@@ -39,5 +39,10 @@ handlers:
 - url: /static
   static_dir: application/static
 
+- url: /shell.*
+  script: application.shell.app
+  login: admin
+
 - url: .*
   script: application.app
+
