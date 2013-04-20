@@ -21,6 +21,7 @@ def inject_profiler():
 
 # Pull in URL dispatch routes
 import urls
+import views
 
 # Flask-DebugToolbar (only enabled when DEBUG=True)
 # toolbar = DebugToolbarExtension(app)

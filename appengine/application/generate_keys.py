@@ -30,14 +30,19 @@ file_template = Template('''# CSRF- and Session keys
 
 CSRF_SECRET_KEY = '$csrf_key'
 SESSION_KEY = '$session_key'
+
+G_API_CLIENT_ID = ''
+G_API_EMAIL_ADDRESS = ''
+G_API_CLIENT_SECRET = ''
+G_API_REDIRECT = ''
 ''')
 
 
 # Get options from command line
 parser = OptionParser()
-parser.add_option("-f", "--force", dest="force", 
+parser.add_option("-f", "--force", dest="force",
     help="force overwrite of existing secret_keys file", action="store_true")
-parser.add_option("-r", "--randomness", dest="randomness", 
+parser.add_option("-r", "--randomness", dest="randomness",
     help="length (randomness) of generated key; default = 24", default=24)
 (options, args) = parser.parse_args()
 

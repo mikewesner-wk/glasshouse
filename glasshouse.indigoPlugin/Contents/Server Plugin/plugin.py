@@ -28,7 +28,7 @@ class Plugin(indigo.PluginBase):
         indigo.insteon.subscribeToOutgoing()
         indigo.x10.subscribeToIncoming()
         indigo.x10.subscribeToOutgoing()
-
+        indigo.devices.subscribeToChanges() # -> def deviceUpdated(self, origDev, newDev)
         db.setup()
 
     def shutdown(self):
