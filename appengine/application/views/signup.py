@@ -19,13 +19,6 @@ def signup():
 
 @app.route('/oauth2callback')
 def oauth2callback():
-    call.flow = OAuth2WebServerFlow(
-            client_id=secret_keys.G_API_CLIENT_ID,
-            client_secret=secret_keys.G_API_CLIENT_SECRET,
-            redirect_uri='https://xglasshouse.appspot.com/oauth2callback',
-            scope='https://www.googleapis.com/auth/userinfo.profile',
-            user_agent='my-sample/1.0')
-
     user = users.get_current_user()
 
     if request.args.get('code'):
@@ -48,9 +41,13 @@ def oauth2callback():
 @login_required
 def testoa1():
     user = users.get_current_user()
-
     resp = call.get('https://www.googleapis.com/oauth2/v2/userinfo', userid=user.user_id())
-
     return resp.text
 
+@app.route('/testoa2')
+@login_required
+def testoa2():
+    user = users.get_current_user()
+    resp = call.get('https://www.googleapis.com/drive/v2/files', userid=user.user_id())
+    return resp.text
 

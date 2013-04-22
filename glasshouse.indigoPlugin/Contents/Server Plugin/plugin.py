@@ -3,13 +3,7 @@ import rest
 import db
 import requests
 
-# Note the "indigo" module is automatically imported and made available inside
-# our global name space by the host process.
-
-
-################################################################################
 class Plugin(indigo.PluginBase):
-    ########################################
     def __init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs):
         indigo.PluginBase.__init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs)
         self.debug = True
@@ -17,13 +11,7 @@ class Plugin(indigo.PluginBase):
     def __del__(self):
         indigo.PluginBase.__del__(self)
 
-    ########################################
     def startup(self):
-        self.debugLog(u"startup called -- subscribing to all X10 and INSTEON commands")
-
-        # if not self.pluginPrefs.has_key("apitoken"):
-        #     self.pluginPrefs["apitoken"] = "1234"  # default (first launch) pref values
-
         indigo.insteon.subscribeToIncoming()
         indigo.insteon.subscribeToOutgoing()
         indigo.x10.subscribeToIncoming()
@@ -32,7 +20,7 @@ class Plugin(indigo.PluginBase):
         db.setup()
 
     def shutdown(self):
-        self.debugLog(u"shutdown called")
+        pass
 
     def runConcurrentThread(self):
         """
@@ -59,8 +47,6 @@ class Plugin(indigo.PluginBase):
             # requests fails of a retry error
             pass
 
-
-    ########################################
     def insteonCommandReceived(self, cmd):
         pass#self.debugLog(u"insteonCommandReceived: \n" + str(cmd))
 
