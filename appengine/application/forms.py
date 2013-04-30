@@ -15,3 +15,10 @@ from flaskext.wtf import validators
 class ExampleForm(wtf.Form):
     example_name = wtf.TextField('Name', validators=[validators.Required()])
     example_description = wtf.TextAreaField('Description', validators=[validators.Required()])
+
+
+class SignupForm(wtf.Form):
+    """
+        Used by signup, to enter dns for house.
+    """
+    house_dns = wft.TextField('housedns', validators=[validators.Required()])

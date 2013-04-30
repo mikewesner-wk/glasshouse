@@ -2,6 +2,7 @@ import indigo
 import rest
 import db
 import requests
+import settings
 
 class Plugin(indigo.PluginBase):
     def __init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs):
@@ -42,7 +43,7 @@ class Plugin(indigo.PluginBase):
         to stop any threads that it may have created.
         """
         try:
-            requests.post('https://127.0.0.1:5000/shutdown')
+            requests.post('https://127.0.0.1:5000/shutdown', auth=(settings.BASIC_USERNAME, settings.BASIC_PASSWORD))
         except Exception:
             # requests fails of a retry error
             pass

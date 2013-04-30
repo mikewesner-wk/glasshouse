@@ -1,4 +1,4 @@
-from flask import request, render_template, flash, url_for, redirect
+from flask import request, render_template, flash, url_for, redirect, Response, json, jsonify
 from application import app
 import httplib2
 from application.decorators import login_required, admin_required
@@ -36,6 +36,28 @@ def oauth2callback():
 
     elif request.args.get('error'):
         return "User denied the request for credentials"
+
+
+@app.route('/checktoken', methods=['put'])
+def checktoken():
+    token = request.headers.get('token')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/testoa1')
 @login_required

@@ -1,7 +1,20 @@
 import sqlite3 as lite
 import model
 
+#
+#
+# This file supports a basic key/value storage
+
 GLOBALSETTINGS = {}
+
+
+def get(key):
+    global GLOBALSETTINGS
+    return GLOBALSETTINGS.get(key, None)
+
+
+def put(key, value):
+    insert_globalsetting(key, value)
 
 
 def _get_connection():
@@ -32,8 +45,8 @@ def setup():
         indigo.server.log(str(error))
 
 
-
 def insert_globalsetting(key, value):
+    global GLOBALSETTINGS
     con = _get_connection()
     c = con.cursor()
     c.execute('Insert into GlobalSetting values (%s, %s)' % (key, value))
