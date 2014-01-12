@@ -1,3 +1,5 @@
+import logging
+
 from requests import api
 from oauth2client.appengine import StorageByKeyName, CredentialsNDBModel
 from oauth2client.client import OAuth2WebServerFlow
@@ -6,7 +8,7 @@ from application import secret_keys
 
 GLASS_TIMELINE_API = 'https://www.googleapis.com/auth/glass.timeline'
 USER_INFO_API = 'https://www.googleapis.com/auth/userinfo.profile'
-scopes = [USER_INFO_API]
+scopes = [USER_INFO_API, GLASS_TIMELINE_API]
 
 flow = OAuth2WebServerFlow(
     client_id=secret_keys.G_API_CLIENT_ID,
@@ -48,10 +50,17 @@ def _refresh_oauth2_token(credentials, userid):
     modifies the httplib2.Http.request stuff.  We store the updated
     credentials for later.
     """
+    from oauth2client.client import AccessTokenRefreshError
+
     http = httplib2.Http()
     http = credentials.authorize(http)
-    credentials.refresh(http)
     storage = StorageByKeyName(CredentialsNDBModel, userid, 'credentials')
+    try:
+        credentials.refresh(http)
+    except AccessTokenRefreshError:
+        logging.info("AccessTokenRefreshError: lets delete the creds.")
+        storage.delete()
+        return
     storage.put(credentials)
     return credentials
 
@@ -101,7 +110,7 @@ def req(apifunc, url, **kwargs):
     resp = apifunc(url, **kwargs)
 
     if userid and credentials and resp.status_code == 401:
-        credentials = _refresh_oauth2_token(credentials)
+        credentials = _refresh_oauth2_token(credentials, userid)
         headers = _setup_oauth2_headers(credentials, headers)
         kwargs['headers'] = headers
         resp = apifunc(url, **kwargs)

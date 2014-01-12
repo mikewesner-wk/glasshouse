@@ -38,12 +38,12 @@ def shutdown():
     return 'Shutting Down.'
 
 @app.route('/logs')
-@requires_apitoken
+@requires_auth
 def api_logs():
     try:
-        #resp = jsonify(indigo.server.getEventLogList().split('\n'))
-        resp = jsonify({"logs":indigo.server.getEventLogList()})
-        resp.status_code = 200
+        resp = indigo.server.getEventLogList().replace("\n", "<br/>")
+        #resp = jsonify({"logs":indigo.server.getEventLogList()})
+        #resp.status_code = 200
     except Exception, e:
         indigo.server.log(str(e))
         return None

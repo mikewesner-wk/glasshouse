@@ -21,4 +21,4 @@ class SignupForm(wtf.Form):
     """
         Used by signup, to enter dns for house.
     """
-    house_dns = wft.TextField('housedns', validators=[validators.Required()])
+    house_dns = wtf.TextField('housedns', validators=[validators.Required()])

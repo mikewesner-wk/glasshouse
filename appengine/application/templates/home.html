@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block style_block %}
+    <style type="text/css">
+        table.table { width: 60%; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% if user %}
+        You seem to be logged in.
+    {% else %}
+        You are not logged in.
+
+        <a href="/signup" class="btn btn-primary" data-toggle="modal" >
+            <i class="icon-plus-sign icon-white"></i>
+            Login
+        </a>
+    {% endif %}
+{% endblock content %}

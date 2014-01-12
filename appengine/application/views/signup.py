@@ -10,6 +10,9 @@ from google.appengine.api import users
 
 from application import call
 
+# https://developers.google.com/api-client-library/python/
+from apiclient.discovery import build
+
 @app.route('/signup')
 @login_required
 def signup():
@@ -46,18 +49,8 @@ def checktoken():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+#
+# TESTS
 
 @app.route('/testoa1')
 @login_required

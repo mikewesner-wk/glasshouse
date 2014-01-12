@@ -26,7 +26,7 @@ from google.appengine.ext import ndb
 
 class IndigoHouse(ndb.Model):
     """
-    apikey is used as keyname
+    Key ID: apikey
     """
     owner = ndb.StringProperty()
     host = ndb.StringProperty()
@@ -34,7 +34,11 @@ class IndigoHouse(ndb.Model):
 
 
 class Devices(ndb.Model):
-    pass
+    """
+    Key ID:
+    """
+    dev_id = ndb.StringProperty()
+
 
 class Variables(ndb.Model):
     pass
