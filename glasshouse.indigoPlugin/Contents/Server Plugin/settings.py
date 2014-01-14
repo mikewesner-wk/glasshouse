@@ -1,4 +1,4 @@
-BASIC_USERNAME = "internal"
-BASIC_PASSWORD = "1964658232574339"
+BASIC_USERNAME = "konsole"
+BASIC_PASSWORD = "3141"
 
 CONTROL_APP = "https://xglasshouse.appspot.com"

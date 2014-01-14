@@ -28,10 +28,26 @@ def token():
     return resp
 
 
+@app.route('/dbtest', methods=['GET'])
+def dbtest():
+    try:
+        indigo.server.log("db is " + str(db))
+        indigo.server.log(str(dir(db)))
+        indigo.server.log(str(type(db.GLOBALSETTINGS)))
+        indigo.server.log(str(db.get("mykey")))
+        db.put("mykey", "1")
+        indigo.server.log(str(db.get("mykey")))
+        db.put("mykey", "2")
+        indigo.server.log(str(db.get("mykey")))
+
+    except Exception, e:
+        return str(e) + "::: " + str(db)
+
+    return '1'
+
 @app.route('/shutdown', methods=['POST'])
 @requires_auth
 def shutdown():
-    # todo, some type of security on this endpoint
     from flask import request
     func = request.environ.get('werkzeug.server.shutdown')
     func()

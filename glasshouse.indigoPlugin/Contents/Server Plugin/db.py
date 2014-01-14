@@ -1,40 +1,52 @@
+import indigo
 import sqlite3 as lite
-import model
+
 
 #
 #
 # This file supports a basic key/value storage
+class local(object):
+    def __clear__(self):
+        for k in self.__dict__.keys()[:]:
+            del self.__dict__[k]
+    def __repr__(self):
+        return repr(self.__dict__)
 
-GLOBALSETTINGS = {}
+GLOBALSETTINGS = local()
 
 
 def get(key):
-    global GLOBALSETTINGS
-    return GLOBALSETTINGS.get(key, None)
-
+    if hasattr(GLOBALSETTINGS, key):
+        return getattr(GLOBALSETTINGS, key)
+    return None
 
 def put(key, value):
-    insert_globalsetting(key, value)
-
+    import model
+    model.GlobalSettings.set(key, value)
 
 def _get_connection():
     con = lite.connect('dbfile')
     return con
 
-
 def setup():
+    import model
     try:
         global GLOBALSETTINGS
         # Database setup
         con = _get_connection()
         c = con.cursor()
 
+        # this should create and add indexes for all models
         for model_class in model.sqlite_table_models:
-            sql = 'create table if not exists %s %s' % (model_class.__name__, model_class.lite_schema)
-            c.execute(sql)
+            c.execute(model_class.lite_schema)
+            for model_index in model_class.indexes:
+                c.execute(model_index)
 
+        # this puts all the key/value settings in our global
         c.execute("select * from GlobalSettings")
-        GLOBALSETTINGS = c.fetchone()
+        results = c.fetchall()
+        for k.v in results:
+            setattr(GLOBALSETTINGS, key, value)
 
         con.commit()
 
@@ -44,11 +56,3 @@ def setup():
     except lite.Error, error:
         indigo.server.log(str(error))
 
-
-def insert_globalsetting(key, value):
-    global GLOBALSETTINGS
-    con = _get_connection()
-    c = con.cursor()
-    c.execute('Insert into GlobalSetting values (%s, %s)' % (key, value))
-    con.commit()
-    GLOBALSETTINGS.set(key, value)
