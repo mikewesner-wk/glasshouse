@@ -25,10 +25,15 @@ from application.views.signup import *
 @app.route('/')
 def home():
     user = users.get_current_user()
+    credentials = None
+    if user:
+        credentials = call._get_creds(user.user_id())
 
-    return render_template('home.html', user=user)
+    return render_template('home.html', user=user, credentials=credentials)
 
-
+@app.route('/logout')
+def logout():
+    return redirect(users.create_logout_url('/'))
 
 # @login_required
 # def list_examples():

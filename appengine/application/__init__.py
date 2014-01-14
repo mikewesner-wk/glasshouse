@@ -2,6 +2,13 @@
 Initialize Flask app
 
 """
+import os
+import sys
+
+ROOT_PATH = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
+LIB_PATH = os.path.join(os.path.dirname(ROOT_PATH), 'lib')
+sys.path.insert(0, LIB_PATH)
+
 from flask import Flask
 
 from flask_debugtoolbar import DebugToolbarExtension

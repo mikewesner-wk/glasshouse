@@ -13,7 +13,7 @@ scopes = [USER_INFO_API, GLASS_TIMELINE_API]
 flow = OAuth2WebServerFlow(
     client_id=secret_keys.G_API_CLIENT_ID,
     client_secret=secret_keys.G_API_CLIENT_SECRET,
-    redirect_uri='https://xglasshouse.appspot.com/oauth2callback',
+    redirect_uri=secret_keys.G_API_REDIRECT,
     scope=scopes,
     user_agent='my-sample/1.0')
 
@@ -28,6 +28,15 @@ def _get_creds(userid):
     credentials = storage.get()
     return credentials
 
+def _delete_creds(userid):
+    storage = StorageByKeyName(
+        CredentialsNDBModel, userid, 'credentials'
+    )
+    if storage.get():
+        credentials = storage.locked_delete()
+        return True
+
+    return False
 
 def _setup_oauth2_headers(credentials, headers):
     """

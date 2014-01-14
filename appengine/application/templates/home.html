@@ -7,8 +7,15 @@
 {% endblock %}
 
 {% block content %}
-    {% if user %}
-        You seem to be logged in.
+<!--     {% if user %}
+        You seem to be logged in.<br/><br/>
+        {{ user.id }}
+        {% if credentials %}
+            You also have OAUTH2 credintials stored.
+        {% else %}
+            You don't yet have OAUTH2 credintials.<a href="/signup">Get Them</a>
+        {% endif %}
+
     {% else %}
         You are not logged in.
 
@@ -16,5 +23,81 @@
             <i class="icon-plus-sign icon-white"></i>
             Login
         </a>
-    {% endif %}
+    {% endif %} -->
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="jumbotron">
+                <h1>
+                    GlassHouse
+                </h1>
+                <p>
+                    Glasshouse sits in between your smarthome and your google glass. It lets you configure what you want to see and do with your smart home on glass.
+                </p>
+                <p>
+                    Grab the <a href="#">GlassHouse Indigo Plugin</a> or checkout the <a href="#">api documentation</a> and roll your own
+                    smart home backend.
+
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-small" href="#">Learn more</a> or
+                    {% if user and credentials %}
+                        <a class="btn btn-primary btn-small" href="/myhome">Manage Your Settings</a>
+                    {% else %}
+                        <a class="btn btn-primary btn-small" href="/signup">Sign In and Get Started</a>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="carousel slide" id="carousel-15105">
+                <ol class="carousel-indicators">
+                    <li data-slide-to="0" data-target="#carousel-15105">
+                    </li>
+                    <li data-slide-to="1" data-target="#carousel-15105">
+                    </li>
+                    <li data-slide-to="2" data-target="#carousel-15105" class="active">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item">
+                        <img alt="" src="/static/img/glass900x300.png">
+                        <div class="carousel-caption">
+                            <h4>
+                                Made for Google Glass
+                            </h4>
+                            <p>
+                                GlassHome allows you to see what is happening at your home.
+                                You can also control devices and setup notifications.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img alt="" src="/static/img/house900x300.png">
+                        <div class="carousel-caption">
+                            <h4>
+                                Smart Home
+                            </h4>
+                            <p>
+                                Control an Insteon or X10 smart home with Indigo for Mac and
+                                the GlassHome Plugin or write your own interface with the GlassHome
+                                REST APIs.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <img alt="" src="/static/img/ui900x300.png">
+                        <div class="carousel-caption">
+                            <h4>
+                                Custom Glass UI
+                            </h4>
+                            <p>
+                                Choose what cards you want to see.  Can be sent by GlassHouse or passed through to Google Mirror API from your own applications.
+                            </p>
+                        </div>
+                    </div>
+                </div> <a class="left carousel-control" href="#carousel-15105" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-15105" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}
