@@ -17,8 +17,9 @@ class ExampleForm(wtf.Form):
     example_description = wtf.TextAreaField('Description', validators=[validators.Required()])
 
 
-class SignupForm(wtf.Form):
+class AddHomeForm(wtf.Form):
     """
         Used by signup, to enter dns for house.
     """
     house_dns = wtf.TextField('housedns', validators=[validators.Required()])
+

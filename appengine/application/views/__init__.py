@@ -12,7 +12,7 @@ from application import app
 from flask_cache import Cache
 
 
-from application.decorators import login_required, admin_required
+from application.decorators import login_required, admin_required, login_and_oauth2_required
 # from application.forms import ExampleForm
 # from application.models import ExampleModel
 
@@ -34,6 +34,34 @@ def home():
 @app.route('/logout')
 def logout():
     return redirect(users.create_logout_url('/'))
+
+
+@app.route('/myhome')
+@login_and_oauth2_required
+def myhome():
+    credentials = call._get_creds(users.get_current_user().user_id())
+
+    context = {}
+
+    # Does user have a home setup?
+
+
+
+    return render_template('myhome.html', **context)
+
+@app.route('/addhome')
+@login_and_oauth2_required
+def addhome():
+    user = users.get_current_user()
+    credentials = call._get_creds(user.user_id())
+    if not credentials:
+        return redirect(url_for(signup))
+
+    context = {}
+
+
+
+    return render_template('myhome.html', **context)
 
 # @login_required
 # def list_examples():

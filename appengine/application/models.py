@@ -24,8 +24,12 @@ from google.appengine.ext import ndb
 #     timestamp = ndb.DateTimeProperty(auto_now_add=True)
 
 
-class IndigoHouse(ndb.Model):
+class SmartHome(ndb.Model):
     """
+    This represents a 'client' of smarthome.  Intended to be home automation
+    control software, but it could be anything that controls Devices, Variables
+    and Actions
+
     Key ID: apikey
     """
     owner = ndb.StringProperty()
@@ -35,6 +39,7 @@ class IndigoHouse(ndb.Model):
 
 class Devices(ndb.Model):
     """
+    This contains all the information about devices
     Key ID:
     """
     dev_id = ndb.StringProperty()

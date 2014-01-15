@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block style_block %}
+    <style type="text/css">
+        table.table { width: 60%; }
+    </style>
+{% endblock %}
+
+{% block content %}
+<!--     {% if user %}
+        You seem to be logged in.<br/><br/>
+        {{ user.id }}
+        {% if credentials %}
+            You also have OAUTH2 credintials stored.
+        {% else %}
+            You don't yet have OAUTH2 credintials.<a href="/signup">Get Them</a>
+        {% endif %}
+
+    {% else %}
+        You are not logged in.
+
+        <a href="/signup" class="btn btn-primary" data-toggle="modal" >
+            <i class="icon-plus-sign icon-white"></i>
+            Login
+        </a>
+    {% endif %} -->
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="jumbotron">
+                <h1>
+                    GlassHouse
+                </h1>
+                <p>
+                    Glasshouse sits in between your smarthome and your google glass. It lets you configure what you want to see and do with your smart home on glass.
+                </p>
+                <p>
+                    Grab the <a href="#">GlassHouse Indigo Plugin</a> or checkout the <a href="#">api documentation</a> and roll your own
+                    smart home backend.
+
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-small" href="#">Learn more</a> or
+                    {% if user and credentials %}
+                        <a class="btn btn-primary btn-small" href="/myhome">Manage Your Settings</a>
+                    {% else %}
+                        <a class="btn btn-primary btn-small" href="/signup">Sign In and Get Started</a>
+                    {% endif %}
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}
