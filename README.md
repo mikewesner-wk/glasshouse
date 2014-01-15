@@ -57,8 +57,34 @@ Install Instructions for setting up your own appspot.
     3.
 
 Install Instructions for local dev environtment:
+    To configure virtualenvwrapper to run at start up update your profile (.bashrc,
+    bash_profile, .profile, .zshrc, etc)
+    ```
+    open ~/.profile
 
-    1. pip install -r requirements_dev.txt
+    # virtualenvwrapper
+
+    # Sets the working directory for all virtualenvs
+    export WORKON_HOME=$HOME/dev/
+
+    # Sources the virtualenvwrapper so all the commands are availabe in the shell
+    source /usr/local/bin/virtualenvwrapper.sh
+    ```
+
+    * Create a virtual environment for this
+
+    ```
+    $ [sudo] pip install virtualenv
+    $ [sudo] pip install virtualenvwrapper
+    $ source /usr/local/bin/virtualenvwrapper.sh
+    $ cd /where/you/have/glasshouse
+    $ mkvirtualenv glasshouse -a $PWD
+    $ workon glasshouse
+    $ cdvirtualenv
+    $ echo $(python -c "from distutils.sysconfig import get_python_lib; print('export PYTHONPATH=' + get_python_lib())") >> bin/activate
+    $ pip install -Ur requirements_dev.txt
+    $ pip install -Ur requirements.txt
+    ```
 
     To deploy to appengine:
         appcfg.py update appengine

@@ -9,6 +9,10 @@ ROOT_PATH = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 LIB_PATH = os.path.join(os.path.dirname(ROOT_PATH), 'lib')
 sys.path.insert(0, LIB_PATH)
 
+sys.path.insert(0, '/Users/mike/dev/wf/glasshouse/lib/python2.7/site-packages')
+
+print sys.path
+
 from flask import Flask
 
 from flask_debugtoolbar import DebugToolbarExtension
