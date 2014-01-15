@@ -66,3 +66,17 @@ Install Instructions for local dev environtment:
     To iterate on the plugin:
         ./build_plugin.sh
         reload plugin in indigo
+
+
+
+
+
+
+Dependencies Notes:
+uritemplate
+    used by: apiclient oauth2client
+    https://pypi.python.org/pypi/uritemplate
+
+_pytest and py are related
+
+
