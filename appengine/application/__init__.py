@@ -7,9 +7,10 @@ import sys
 
 ROOT_PATH = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 LIB_PATH = os.path.join(os.path.dirname(ROOT_PATH), 'lib')
+SITEPACKAGES_PATH = os.path.join(LIB_PATH, 'site-packages')
 sys.path.insert(0, LIB_PATH)
+sys.path.insert(0, SITEPACKAGES_PATH)
 
-sys.path.insert(0, '/Users/mike/dev/wf/glasshouse/lib/python2.7/site-packages')
 
 print sys.path
 

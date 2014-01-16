@@ -80,11 +80,15 @@ Install Instructions for local dev environtment:
     $ cd /where/you/have/glasshouse
     $ mkvirtualenv glasshouse -a $PWD
     $ workon glasshouse
+    $ ln -s $VIRTUAL_ENV/lib/python2.7/site-packages/ appengine/lib/site-packages
     $ cdvirtualenv
     $ echo $(python -c "from distutils.sysconfig import get_python_lib; print('export PYTHONPATH=' + get_python_lib())") >> bin/activate
     $ pip install -Ur requirements_dev.txt
     $ pip install -Ur requirements.txt
     ```
+
+    Next generate and setup your secret keys file:
+    
 
     To deploy to appengine:
         appcfg.py update appengine
