@@ -20,6 +20,4 @@ class GlobalSettings(object):
 
 
 
-
-
 sqlite_table_models = [GlobalSettings]
