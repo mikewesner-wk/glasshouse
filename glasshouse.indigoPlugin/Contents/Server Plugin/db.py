@@ -45,8 +45,12 @@ def setup():
         # this puts all the key/value settings in our global
         c.execute("select * from GlobalSettings")
         results = c.fetchall()
-        for k.v in results:
-            setattr(GLOBALSETTINGS, key, value)
+
+        indigo.server.log("Stored Settings:")
+        for row in results:
+            k, v = row
+            indigo.server.log("\t%s, %s" % (k,v))
+            setattr(GLOBALSETTINGS, k, v)
 
         con.commit()
 

@@ -57,8 +57,38 @@ Install Instructions for setting up your own appspot.
     3.
 
 Install Instructions for local dev environtment:
+    To configure virtualenvwrapper to run at start up update your profile (.bashrc,
+    bash_profile, .profile, .zshrc, etc)
+    ```
+    open ~/.profile
 
-    1. pip install -r requirements_dev.txt
+    # virtualenvwrapper
+
+    # Sets the working directory for all virtualenvs
+    export WORKON_HOME=$HOME/dev/
+
+    # Sources the virtualenvwrapper so all the commands are availabe in the shell
+    source /usr/local/bin/virtualenvwrapper.sh
+    ```
+
+    * Create a virtual environment for this
+
+    ```
+    $ [sudo] pip install virtualenv
+    $ [sudo] pip install virtualenvwrapper
+    $ source /usr/local/bin/virtualenvwrapper.sh
+    $ cd /where/you/have/glasshouse
+    $ mkvirtualenv glasshouse -a $PWD
+    $ workon glasshouse
+    $ ln -s $VIRTUAL_ENV/lib/python2.7/site-packages/ appengine/lib/site-packages
+    $ cdvirtualenv
+    $ echo $(python -c "from distutils.sysconfig import get_python_lib; print('export PYTHONPATH=' + get_python_lib())") >> bin/activate
+    $ pip install -Ur requirements_dev.txt
+    $ pip install -Ur requirements.txt
+    ```
+
+    Next generate and setup your secret keys file:
+    
 
     To deploy to appengine:
         appcfg.py update appengine
@@ -66,3 +96,17 @@ Install Instructions for local dev environtment:
     To iterate on the plugin:
         ./build_plugin.sh
         reload plugin in indigo
+
+
+
+
+
+
+Dependencies Notes:
+uritemplate
+    used by: apiclient oauth2client
+    https://pypi.python.org/pypi/uritemplate
+
+_pytest and py are related
+
+
